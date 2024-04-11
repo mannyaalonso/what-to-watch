@@ -113,45 +113,50 @@ export async function POST(request) {
     },
   ]
 
-  // Request completion from OpenAI's model
-  const response = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo-0125", // Specify the model to use
-    messages: messages,
-    tools: tools,
-  })
+  try {
+    // Request completion from OpenAI's model
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-turbo", // Specify the model to use
+      messages: messages,
+      tools: tools,
+    })
 
-  const responseMessage = response.choices[0].message
+    const responseMessage = response.choices[0].message
 
-  // Step 2: Check if the model requested a function call
-  const toolCalls = responseMessage.tool_calls
+    // Step 2: Check if the model requested a function call
+    const toolCalls = responseMessage.tool_calls
 
-  if (responseMessage.tool_calls) {
-    // Step 3: Call the function if requested
-    const availableFunctions = {
-      get_movie_info: getMovieInfo,
+    if (responseMessage.tool_calls) {
+      // Step 3: Call the function if requested
+      const availableFunctions = {
+        get_movie_info: getMovieInfo,
+      }
+
+      messages.push(responseMessage)
+
+      // Iterate through tool calls and execute corresponding functions
+      for (const toolCall of toolCalls) {
+        const functionName = toolCall.function.name
+        const functionToCall = availableFunctions[functionName]
+        const functionArgs = JSON.parse(toolCall.function.arguments)
+        const functionResponse = await functionToCall(functionArgs.title)
+
+        // Push function response to messages array
+        messages.push({
+          tool_call_id: toolCall.id,
+          role: "tool",
+          name: functionName,
+          content: functionResponse,
+        })
+      }
+
+      // Return response with tool messages
+      return NextResponse.json(
+        messages.filter((message) => message.role === "tool")
+      )
     }
-
-    messages.push(responseMessage)
-
-    // Iterate through tool calls and execute corresponding functions
-    for (const toolCall of toolCalls) {
-      const functionName = toolCall.function.name
-      const functionToCall = availableFunctions[functionName]
-      const functionArgs = JSON.parse(toolCall.function.arguments)
-      const functionResponse = await functionToCall(functionArgs.title)
-
-      // Push function response to messages array
-      messages.push({
-        tool_call_id: toolCall.id,
-        role: "tool",
-        name: functionName,
-        content: functionResponse,
-      })
-    }
-
-    // Return response with tool messages
-    return NextResponse.json(
-      messages.filter((message) => message.role === "tool")
-    )
+  } catch (error) {
+    // Return error message if an error occurs
+    return NextResponse.json({ error: error.message })
   }
 }

@@ -83,12 +83,12 @@ describe("BasicSelect", () => {
     )
 
     // Simulate clicking the dropdown
-    const dropdown = screen.getByRole("button", { name: /mood/i })
-    fireEvent.click(dropdown)
+    const dropdown = screen.getAllByRole("button", { name: /mood/i })
+    fireEvent.click(dropdown[0])
 
     // Simulate clicking an option
-    const option = screen.getByRole("option", { name: /bittersweet/i })
-    fireEvent.click(option)
+    const option = screen.getAllByRole("option", { name: /bittersweet/i })
+    fireEvent.click(option[0])
 
     // Assert that the setSelectedOptions function is called twice
     expect(setSelectedOptionsCallCount).toBe(2)
@@ -109,12 +109,12 @@ describe("BasicSelect", () => {
     )
 
     // Simulate clicking the dropdown
-    const dropdown = screen.getByRole("button", { name: /length/i })
-    fireEvent.click(dropdown)
+    const dropdown = screen.getAllByRole("button", { name: /length/i })
+    fireEvent.click(dropdown[0])
 
     // Simulate clicking an option
-    const option = screen.getByRole("option", { name: /longer/i })
-    fireEvent.click(option)
+    const option = screen.getAllByRole("option", { name: /longer/i })
+    fireEvent.click(option[0])
 
     // Assert that the setSelectedOptions function is called thrice
     expect(setSelectedOptionsCallCount).toBe(3)

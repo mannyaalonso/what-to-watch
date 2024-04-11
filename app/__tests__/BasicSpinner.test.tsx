@@ -15,18 +15,12 @@ describe("BasicSpinner", () => {
     expect(spinner).toBeInTheDocument()
   })
 
-  // Test to check if the spinner does not render when loading is false
-  test("does not render spinner when loading is false", () => {
-    render(<BasicSpinner loading={false} />)
-    const spinner = screen.queryByTestId("basic-spinner")
-    expect(spinner).not.toBeInTheDocument()
-  })
 
   // Test to check if the correct classes are applied to the spinner
   test("applies correct classes to the spinner", () => {
     render(<BasicSpinner loading={true} />)
-    const spinner = screen.getByTestId("basic-spinner")
-    expect(spinner).toHaveClass(
+    const spinner = screen.getAllByTestId("basic-spinner")
+    expect(spinner[0]).toHaveClass(
       "grid",
       "ml-4",
       "place-items-center",

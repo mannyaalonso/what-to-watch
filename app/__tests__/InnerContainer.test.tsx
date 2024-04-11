@@ -18,8 +18,8 @@ describe("InnerContainer", () => {
   // Test to check if the component renders an element with correct classes
   test("renders element with correct classes", () => {
     render(<InnerContainer>Test</InnerContainer>)
-    const divElement = screen.getByTestId("inner-container")
-    expect(divElement).toHaveClass(
+    const divElement = screen.getAllByTestId("inner-container")
+    expect(divElement[0]).toHaveClass(
       "flex",
       "flex-col",
       "sm:flex-row",

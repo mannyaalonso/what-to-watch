@@ -13,8 +13,8 @@ The "What to Watch" app is a movie recommendation application that leverages the
 
 ## Speed
 Fetching the movies might feel slow, but understand there is a lot going on under the hood. 
-1. Calls chat-gpt with the users inputs
-2. Structures the response into json 
+1. Calls gpt-4-turbo with the users inputs (newest model, better outputs but it's slower at the moment).
+2. Structures the response into json and sends it to call OMDb API.
 3. Calls OMDb API one title at a time to get more info and poster image about each movie recommened.
 
 ## Components

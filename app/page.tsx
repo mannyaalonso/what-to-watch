@@ -12,6 +12,7 @@ import BasicHeading from "./components/BasicHeading"
 import BasicAlert from "./components/BasicAlert"
 import OuterContainer from "./components/OuterContainer"
 import InnerContainer from "./components/InnerContainer"
+import LoadingMessages from "./components/LoadingMessages"
 
 // Interface for the options
 interface Option {
@@ -260,6 +261,8 @@ export default function Home() {
             text={"Random"}
           />
         </InnerContainer>
+
+        <LoadingMessages loading={loading} />
 
         <BasicGallery movies={movies} loading={loading} />
       </OuterContainer>

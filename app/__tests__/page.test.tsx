@@ -39,9 +39,8 @@ describe("Home", () => {
     render(<Home />)
 
     // Click on the 'Search' button
-    fireEvent.click(screen.getByRole("button", { name: /search/i }))
-
-    console.log("isGetCalled:", isGetCalled)
+    const button = screen.getAllByRole("button", { name: /search/i })
+    fireEvent.click(button[0])
 
     // Check if axios.get was called
     expect(isGetCalled).toBe(true)
@@ -52,17 +51,23 @@ describe("Home", () => {
     render(<Home />)
 
     // Click on the 'Random' button
-    fireEvent.click(screen.getByRole("button", { name: /random/i }))
+    const button = screen.getAllByRole("button", { name: /random/i })
+    fireEvent.click(button[0])
 
     // Ensure inputs are updated with random values
     await waitFor(() => {
-      expect(screen.getByLabelText(/genre/i)).toHaveTextContent(
+      const genre = screen.getAllByLabelText(/genre/i)
+      expect(genre[0]).toHaveTextContent(
         /action|adventure|animation|comedy|crime|documentary|drama|fantasy|historical|horror|musical|mystery|romance|science fiction|thriller|war|western|biographical|family|sports|supernatural|psychological|noir|disaster|martial arts|spy|coming of age|epic|satire|slice of life|superhero/i
       )
-      expect(screen.getByLabelText(/mood/i)).toHaveTextContent(
+
+      const mood = screen.getAllByLabelText(/mood/i)
+      expect(mood[0]).toHaveTextContent(
         /bittersweet|captivating|chilling|dark|dramatic|eerie|empowering|enchanting|exciting|heartwarming|hopeful|humorous|inspiring|intense|light-hearted|melancholic|mysterious|nostalgic|poignant|reflective|romantic|serene|suspenseful|thrilling|thought-provoking|touching|triumphant|uplifting|whimsical|witty/i
       )
-      expect(screen.getByLabelText(/length/i)).toHaveTextContent(
+
+      const length = screen.getAllByLabelText(/length/i)
+      expect(length[0]).toHaveTextContent(
         /longer|shorter/i
       )
     })

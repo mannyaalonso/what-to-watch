@@ -26,25 +26,25 @@ describe("BasicHeading", () => {
   test("applies correct classes to title and subtitle elements", () => {
     render(<BasicHeading title={title} subtitle={subtitle} />)
     // Assertions for title and subtitle classes
-    const titleElement = screen.getByText(title)
-    const subtitleElement = screen.getByText(subtitle)
-    expect(titleElement).toHaveClass(
+    const titleElement = screen.getAllByText(title)
+    const subtitleElement = screen.getAllByText(subtitle)
+    expect(titleElement[0]).toHaveClass(
       "text-4xl",
       "font-bold",
       "tracking-tight",
       "text-white",
       "sm:text-6xl"
     )
-    expect(subtitleElement).toHaveClass("text-lg", "leading-8", "text-gray-300")
+    expect(subtitleElement[0]).toHaveClass("text-lg", "leading-8", "text-gray-300")
   })
 
   // Test to check if title and subtitle have correct text content
   test("has correct text content for title and subtitle", () => {
     render(<BasicHeading title={title} subtitle={subtitle} />)
     // Assertions for title and subtitle text content
-    const titleElement = screen.getByText(title)
-    const subtitleElement = screen.getByText(subtitle)
-    expect(titleElement.textContent).toBe(title)
-    expect(subtitleElement.textContent).toBe(subtitle)
+    const titleElement = screen.getAllByText(title)
+    const subtitleElement = screen.getAllByText(subtitle)
+    expect(titleElement[0].textContent).toBe(title)
+    expect(subtitleElement[0].textContent).toBe(subtitle)
   })
 })
