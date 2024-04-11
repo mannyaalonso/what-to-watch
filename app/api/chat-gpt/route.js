@@ -1,3 +1,6 @@
+export const maxDuration = 300 // 300 seconds
+export const dynamic = "force-dynamic"
+
 // Importing required modules and libraries
 import { NextResponse } from "next/server"
 import OpenAI from "openai"
@@ -112,7 +115,7 @@ export async function POST(request) {
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo",
       messages: messages,
-      tools: tools
+      tools: tools,
     })
 
     // Logic for handling the response and tool calls
@@ -133,7 +136,7 @@ export async function POST(request) {
         const functionName = toolCall.function.name
         const functionToCall = availableFunctions[functionName]
         const functionArgs = JSON.parse(toolCall.function.arguments)
-        const functionResponse = await functionToCall(functionArgs.title,)
+        const functionResponse = await functionToCall(functionArgs.title)
 
         messages.push({
           tool_call_id: toolCall.id,
