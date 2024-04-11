@@ -30,8 +30,9 @@ Fetching the movies might feel slow, but understand there is a lot going on unde
 - OuterContainer component is a simple container that holds the main components
 
 ## Live Demo
-Visit the live demo here:
-- Keep in mind, if the server fails, I most likely ran out of API calls, so feel free to follow installation instructions below to keep testing.
+Visit the live demo here: [LIVE](https://what-to-watch-silk.vercel.app)
+- The server will respond better in local environment, Vercel tends to time-out chat-gpt calls since they take 20-30 seconds. 
+- Keep in mind, if the server fails, I most likely ran out of API calls or Vercel keeps timing out the calls, so feel free to follow installation instructions below for a better experience.
 
 ## Installation
 1. Clone the repository:
