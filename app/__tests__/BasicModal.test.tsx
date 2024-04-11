@@ -1,7 +1,7 @@
 // Importing necessary modules and setting up test environment
 "use client"
 import React from "react"
-import { test, expect } from "vitest"
+import { test, expect, describe } from "vitest"
 import "./setupTests"
 import { render, screen } from "@testing-library/react"
 import BasicModal from "../components/BasicModal"

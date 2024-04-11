@@ -1,7 +1,7 @@
 // Importing required modules and libraries
 "use client"
 import React from "react"
-import { test, expect } from "vitest"
+import { test, expect, describe } from "vitest"
 import { render, screen } from "@testing-library/react"
 import InnerContainer from "../components/InnerContainer"
 import "@testing-library/jest-dom/vitest"

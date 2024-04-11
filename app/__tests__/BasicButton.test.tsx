@@ -1,7 +1,7 @@
 // Importing necessary modules and setting up test environment
 "use client"
 import React from "react"
-import { test, expect } from "vitest"
+import { test, expect, describe } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
 import BasicButton from "../components/BasicButton" // Importing the BasicButton component
 import "@testing-library/jest-dom/vitest"
